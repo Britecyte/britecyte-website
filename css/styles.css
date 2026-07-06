@@ -518,7 +518,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .hero-stat-card {
-  padding: var(--space-card) var(--space-card-lg);
   /* layout hook — visual styling from .surface */
 }
 
