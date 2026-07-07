@@ -101,18 +101,52 @@ function scrollToInitialHash() {
   }
 }
 
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/brighterlives@britecyte.com';
+
 function initContactForm() {
   const form = document.querySelector('[data-contact-form]');
   const success = document.querySelector('[data-form-success]');
+  const error = document.querySelector('[data-form-error]');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const defaultBtnLabel = submitBtn?.textContent?.trim() || 'Send message';
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    form.querySelectorAll('input, textarea, select, button').forEach((el) => {
-      el.disabled = true;
-    });
-    if (success) {
-      success.hidden = false;
+
+    const fields = form.querySelectorAll('input, textarea, select, button');
+    fields.forEach((el) => { el.disabled = true; });
+    if (success) success.hidden = true;
+    if (error) error.hidden = true;
+    if (submitBtn) submitBtn.textContent = 'Sending…';
+
+    const subjectField = form.querySelector('[name="subject"]');
+    const subjectHidden = form.querySelector('[name="_subject"]');
+    if (subjectField instanceof HTMLSelectElement && subjectHidden instanceof HTMLInputElement) {
+      const label = subjectField.options[subjectField.selectedIndex]?.text || 'General inquiry';
+      subjectHidden.value = `Britecyte website — ${label}`;
+    }
+
+    try {
+      const response = await fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (!response.ok) throw new Error('Submit failed');
+
+      form.reset();
+      if (success) success.hidden = false;
+    } catch {
+      if (error) error.hidden = false;
+    } finally {
+      fields.forEach((el) => { el.disabled = false; });
+      if (submitBtn) submitBtn.textContent = defaultBtnLabel;
     }
   });
 }
