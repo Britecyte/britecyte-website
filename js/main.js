@@ -1,12 +1,15 @@
-import { initSectionMotifs } from './section-motifs.js';
+import { initSectionMotifs } from './section-motifs.js?v=20260710l';
+import { initNewsGrid } from './news.js?v=20260710l';
 
 document.addEventListener('DOMContentLoaded', () => {
   initSectionMotifs();
+  initNewsGrid();
   initMobileNav();
   initSmoothScroll();
   initScrollReveal();
   initHeaderScroll();
   initContactForm();
+  initArticleNav();
   initYear();
   scrollToInitialHash();
 });
@@ -154,5 +157,27 @@ function initContactForm() {
 function initYear() {
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());
+  });
+}
+
+function initArticleNav() {
+  const nav = document.querySelector('[data-article-nav]');
+  if (!nav) return;
+
+  const forward = nav.querySelector('[data-article-forward]');
+  const prev = nav.querySelector('[data-article-prev]');
+
+  document.addEventListener('keydown', (e) => {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target instanceof Element ? e.target.closest('input, textarea, select, [contenteditable="true"]') : null);
+    if (tag) return;
+
+    if (e.key === 'ArrowLeft' && forward?.href) {
+      e.preventDefault();
+      window.location.assign(forward.href);
+    } else if (e.key === 'ArrowRight' && prev?.href) {
+      e.preventDefault();
+      window.location.assign(prev.href);
+    }
   });
 }

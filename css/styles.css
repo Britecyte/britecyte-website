@@ -38,10 +38,15 @@
   --container-max: 72rem;
   --shadow-lift: 0 18px 50px -28px #8b451347;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --space-card: 1.25rem;
-  --space-card-lg: 1.5rem;
+  --space-card: 1.35rem;
+  --space-card-lg: 1.65rem;
   --section-bg: rgba(255, 251, 247, 0.65);
   --section-padding: 4.5rem;
+  --surface-fill: rgba(255, 255, 255, 0.48);
+  --type-h2: clamp(1.75rem, 3.6vw, 2.5rem);
+  --type-h3: 1.25rem;
+  --type-body: 0.95rem;
+  --type-lead: 1.05rem;
 }
 
 *,
@@ -203,9 +208,9 @@ button {
 .surface {
   padding: var(--space-card);
   border: 1px solid #e8d9c8;
-  background-color: #ffffff22;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background-color: var(--surface-fill);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   box-shadow: var(--shadow-lift);
 }
 
@@ -216,7 +221,7 @@ button {
 
 /* Slightly stronger glass (used sparingly for emphasis) */
 .surface-glass {
-  background-color: #fffbf7c4;
+  background-color: rgba(255, 251, 247, 0.92);
   border-color: #e8d9c8c4;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -224,16 +229,16 @@ button {
 
 /* Accent tint (warm) — toned to harmonize with base surface transparency */
 .surface-accent {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 240, 230, 0.28) 100%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 230, 0.86) 100%);
   border-color: rgba(192, 120, 46, 0.28);
 }
 
 /* Tile variant (used in grids) */
 .surface-tile {
-  background-color: #ffffff22;
+  background-color: var(--surface-fill);
   border: 1px solid #e8d9c8;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   box-shadow: var(--shadow-lift);
 }
 
@@ -310,13 +315,11 @@ button {
   overflow-x: clip;
 }
 
-.section:not(.products-section) {
-  padding-top: calc(var(--section-padding) * 0.6);
-}
-
 .section-white,
 .section-cream {
   background: var(--section-bg);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 @media (min-width: 768px) {
@@ -326,20 +329,23 @@ button {
 }
 
 .section-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
+  max-width: 40rem;
 }
 
 .section-header-center {
-  text-align: center;
+  text-align: left;
   max-width: 40rem;
-  margin-inline: auto;
-  margin-bottom: 3rem;
+  margin-inline: 0;
+  margin-bottom: 2rem;
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-size: var(--type-h2);
   line-height: 1.15;
-  margin-top: 0.75rem;
+  margin: 0;
+  text-wrap: balance;
+  color: var(--color-ink);
 }
 
 .section-title-sm {
@@ -354,15 +360,21 @@ button {
 }
 
 .section-intro {
-  margin-top: 1rem;
+  margin-top: 0.875rem;
   max-width: 36rem;
   color: var(--color-ink-soft);
   line-height: 1.65;
-  font-size: 1.05rem;
+  font-size: var(--type-lead);
 }
 
-.section-header-center .section-intro {
-  margin-inline: auto;
+.section-intro a {
+  color: var(--color-flame);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.section-intro a:hover {
+  color: var(--color-bronze);
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────── */
@@ -534,22 +546,36 @@ button {
 }
 
 /* ── Card copy (typography inside surfaces) ──────────────────────────────── */
-.card-title {
-  font-size: 1.125rem;
+.card-title,
+.news-title,
+.pathway-title,
+.platform-proof h3 {
+  font-size: var(--type-h3);
   margin-bottom: 0.625rem;
-  line-height: 1.35;
-}
-
-.card-title-lg {
-  font-size: 1.375rem;
-  margin: 0.625rem 0;
   line-height: 1.3;
+  color: var(--color-ink);
 }
 
-.card-body {
+.card-title-lg,
+.our-story-heading,
+.platform-outcomes-title {
+  font-size: 1.375rem;
+  margin: 0 0 1rem;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.card-body,
+.our-story-copy,
+.pathway-body,
+.platform-outcomes-lead,
+.platform-proof p,
+.news-excerpt,
+.news-body,
+.product-desc {
   color: var(--color-ink-soft);
   line-height: 1.65;
-  font-size: 0.95rem;
+  font-size: var(--type-body);
 }
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
@@ -582,9 +608,9 @@ button {
 }
 
 .hero-headline {
-  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .hero-subhead {
@@ -592,7 +618,7 @@ button {
   max-width: 32rem;
   color: var(--color-ink-soft);
   line-height: 1.65;
-  font-size: 1.05rem;
+  font-size: var(--type-lead);
 }
 
 .hero-subhead strong {
@@ -686,20 +712,16 @@ button {
 }
 
 .pathway-title {
-  font-size: 1.125rem;
-  line-height: 1.35;
   margin-bottom: 0.625rem;
 }
 
 .pathway-body {
-  font-size: 0.95rem;
-  color: var(--color-ink-soft);
-  line-height: 1.65;
+  margin: 0;
 }
 
 .platform-outcomes {
   margin-bottom: 3rem;
-  padding: 1.5rem;
+  padding: var(--space-card-lg);
 }
 
 .platform-outcomes-copy {
@@ -707,17 +729,8 @@ button {
   margin-bottom: 1.5rem;
 }
 
-.platform-outcomes-title {
-  font-size: 1.5rem;
-  line-height: 1.25;
-  margin-top: 0.75rem;
-}
-
 .platform-outcomes-lead {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
-  color: var(--color-ink-soft);
-  line-height: 1.65;
+  margin: 0;
 }
 
 .platform-outcomes-portrait {
@@ -769,15 +782,11 @@ button {
 }
 
 .platform-proof h3 {
-  font-size: 1.125rem;
   margin-bottom: 0.5rem;
-  line-height: 1.35;
 }
 
 .platform-proof p {
-  font-size: 0.95rem;
-  color: var(--color-ink-soft);
-  line-height: 1.6;
+  margin: 0;
 }
 
 @media (min-width: 1024px) {
@@ -786,7 +795,7 @@ button {
   }
 
   .platform-outcomes {
-    padding: 2rem;
+    padding: var(--space-card-lg);
   }
 
   .platform-outcomes-metrics {
@@ -804,18 +813,13 @@ button {
   gap: 1.5rem;
 }
 
-.our-story-heading {
-  font-size: 1.5rem;
-  margin: 0.75rem 0 1.25rem;
-  line-height: 1.3;
-}
-
 .our-story-copy {
   display: grid;
   gap: 1.25rem;
-  color: var(--color-ink-soft);
-  line-height: 1.7;
-  font-size: 0.95rem;
+}
+
+.our-story-copy p {
+  margin: 0;
 }
 
 .our-story-milestones {
@@ -827,7 +831,7 @@ button {
 .our-story-milestones-list {
   display: grid;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 0;
   font-size: 0.9rem;
   color: var(--color-ink-soft);
 }
@@ -907,10 +911,8 @@ button {
 }
 
 .product-desc {
-  color: var(--color-ink-soft);
-  line-height: 1.6;
-  font-size: 0.95rem;
   flex: 1;
+  margin-bottom: 1rem;
 }
 
 .product-features {
@@ -957,8 +959,9 @@ button {
   }
 }
 
-/* Product section — syringe photo via img layer (object-fit: contain, no stretch) */
-.products-section {
+/* Photo sections: large natural contain — same treatment as original blue vial */
+.products-section,
+.section-with-photo {
   isolation: isolate;
 }
 
@@ -976,27 +979,20 @@ button {
   top: 50%;
   transform: translate(-50%, -50%);
   width: min(calc(var(--container-max) + 6rem), 98vw);
-  height: 100%;
   line-height: 0;
-}
-
-.products-bg-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom,
-      rgba(255, 251, 247, 0.35) 0%,
-      rgba(255, 251, 247, 0.55) 100%);
-  pointer-events: none;
 }
 
 .products-bg-photo {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: none;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
+}
+
+#team .products-bg-frame {
+  top: 39%;
 }
 
 /* ── About / History timeline (V3 style, orange aesthetic) ───────────────── */
@@ -1149,14 +1145,21 @@ button {
   gap: 1.25rem;
 }
 
-.news-card {
+a.news-card {
   display: flex;
   flex-direction: column;
   height: 100%;
   outline: none;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
 }
 
-.news-card:focus-visible {
+a.news-card:hover {
+  transform: translateY(-2px);
+}
+
+a.news-card:focus-visible {
   box-shadow:
     0 0 0 3px var(--color-accent-ring),
     var(--shadow-lift);
@@ -1168,24 +1171,8 @@ button {
   margin-bottom: 0.625rem;
 }
 
-.news-title {
-  font-size: 1.125rem;
-  margin-bottom: 0.625rem;
-  line-height: 1.35;
-}
-
 .news-excerpt {
-  font-size: 0.95rem;
-  color: var(--color-ink-soft);
-  line-height: 1.55;
   flex: 1;
-}
-
-.news-body {
-  font-size: 0.95rem;
-  color: rgba(74, 84, 112, 0.82);
-  line-height: 1.6;
-  margin-top: 0.75rem;
 }
 
 .news-tag {
@@ -1194,11 +1181,175 @@ button {
   padding: 0.25rem 0.5rem;
   border: 1px solid var(--color-hairline);
   font-size: 9px;
+  align-self: flex-start;
+}
+
+.news-more {
+  margin-top: 1.75rem;
+}
+
+.news-more--header {
+  margin-top: 0.875rem;
+}
+
+.news-load-error {
+  color: var(--color-ink-soft);
+  font-size: var(--type-body);
+}
+
+.news-grid--page {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .news-grid--page {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1024px) {
   .news-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .news-grid--page {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Article pages */
+.article-container {
+  max-width: 42rem;
+}
+
+.article-back {
+  margin-bottom: 1.5rem;
+}
+
+.article-back a {
+  color: var(--color-flame);
+}
+
+.article-back a:hover {
+  color: var(--color-bronze);
+}
+
+.article-header {
+  margin-bottom: 1.75rem;
+}
+
+.article-title {
+  font-size: var(--type-h2);
+  line-height: 1.2;
+  margin-top: 0.75rem;
+  text-wrap: balance;
+}
+
+.article-body {
+  display: grid;
+  gap: 1.15rem;
+  font-size: var(--type-body);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+}
+
+.article-body p {
+  margin: 0;
+}
+
+.article-links {
+  margin-top: 2rem;
+}
+
+.article-links-label {
+  margin-bottom: 0.75rem;
+  color: var(--color-flame);
+}
+
+.article-links ul {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.article-links a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.article-links a:hover {
+  color: var(--color-bronze);
+}
+
+.article-back-bottom {
+  margin-top: 2rem;
+}
+
+.article-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.article-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid var(--color-hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  min-width: 0;
+}
+
+.article-nav-link:hover {
+  border-color: rgba(30, 68, 140, 0.35);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.article-nav-link.is-empty {
+  visibility: hidden;
+  pointer-events: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.article-nav-prev {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.article-nav-dir {
+  color: var(--color-flame);
+}
+
+.article-nav-title {
+  font-size: var(--type-body);
+  line-height: 1.35;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+@media (max-width: 560px) {
+  .article-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .article-nav-prev {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .article-nav-link.is-empty {
+    display: none;
   }
 }
 
@@ -1213,13 +1364,13 @@ button {
 
 .contact-block {
   width: 100%;
-  max-width: 42rem;
+  max-width: 40rem;
   margin-inline: auto;
 }
 
-.contact-block>.microtype,
-.contact-block>.section-title {
+.contact-block > .section-title {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .team-section {
@@ -1247,9 +1398,14 @@ button {
 .team-card-photo {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
   object-position: center top;
+  transform: translateY(-10%);
+}
+
+#team .team-grid {
+  margin-top: 12%;
 }
 
 .team-card-name {
@@ -1612,14 +1768,18 @@ button {
   mix-blend-mode: multiply;
 }
 
-/* Hide any leftover ambient motif layers (we disabled script insertion) */
+/* Hide ambient line motifs — clusters only */
 .section-ambient-motif {
   display: none !important;
 }
 
-.section-motif-host>.container,
-.section-motif-host>.hero-grid,
-.section-motif-host>.footer-inner {
+.ambient-svg {
+  display: none !important;
+}
+
+.section-motif-host > .container,
+.section-motif-host > .hero-grid,
+.section-motif-host > .footer-inner {
   position: relative;
   z-index: 1;
 }

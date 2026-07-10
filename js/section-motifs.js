@@ -1,5 +1,6 @@
 /**
  * Section adipocyte cluster decorations — adapted from New V3 section-motifs.js
+ * Ambient corner SVGs intentionally disabled.
  */
 export const MOTIF_CONFIG = {
   enabled: true,
@@ -47,20 +48,6 @@ const PLACEMENT_ZONES = [
   { x: [0.82, 0.97], y: [0.78, 0.96] },
 ];
 
-const AMBIENT_SVG = `
-  <svg aria-hidden="true" class="ambient-svg ambient-svg--tl" viewBox="0 0 220 220" fill="none">
-    <circle cx="108" cy="112" r="84" stroke="currentColor" stroke-width="2.2"></circle>
-    <circle cx="108" cy="112" r="56" stroke="currentColor" stroke-width="1.8" opacity="0.85"></circle>
-    <circle cx="74" cy="80" r="18" fill="currentColor" opacity="0.48"></circle>
-    <circle cx="152" cy="142" r="24" stroke="currentColor" stroke-width="2" opacity="0.82"></circle>
-  </svg>
-  <svg aria-hidden="true" class="ambient-svg ambient-svg--br" viewBox="0 0 220 220" fill="none">
-    <circle cx="118" cy="104" r="78" stroke="currentColor" stroke-width="2.2"></circle>
-    <circle cx="118" cy="104" r="50" stroke="currentColor" stroke-width="1.8" opacity="0.85"></circle>
-    <circle cx="86" cy="148" r="20" fill="currentColor" opacity="0.45"></circle>
-    <circle cx="158" cy="68" r="22" stroke="currentColor" stroke-width="2" opacity="0.8"></circle>
-  </svg>`;
-
 function hashString(str) {
   let h = 2166136261;
   for (let i = 0; i < str.length; i += 1) {
@@ -104,7 +91,7 @@ function buildLayout(sectionKey) {
     if (placed.length >= target) break;
     const file = CLUSTER_FILES[Math.floor(rand() * CLUSTER_FILES.length)];
     const sizeRem = clusterSizeRem(file, rand);
-    const point = {
+    placed.push({
       x: zone.x[0] + rand() * (zone.x[1] - zone.x[0]),
       y: zone.y[0] + rand() * (zone.y[1] - zone.y[0]),
       file,
@@ -112,8 +99,7 @@ function buildLayout(sectionKey) {
       rotate: reduced ? 0 : MOTIF_CONFIG.rotate.min + rand() * (MOTIF_CONFIG.rotate.max - MOTIF_CONFIG.rotate.min),
       opacity: MOTIF_CONFIG.opacity.min + rand() * (MOTIF_CONFIG.opacity.max - MOTIF_CONFIG.opacity.min),
       zIndex: Math.floor(rand() * 3),
-    };
-    placed.push(point);
+    });
   }
 
   return placed;
@@ -147,9 +133,6 @@ function decorateSection(container, sectionKey) {
   });
 
   container.prepend(layer);
-
-  // Ambient large SVG disabled — V3 uses tiny embedded line motifs in corners only.
-  // We rely on the small cluster images for subtle decoration.
 }
 
 export function initSectionMotifs() {
