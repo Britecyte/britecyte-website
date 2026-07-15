@@ -128,7 +128,7 @@ function initContactForm() {
     const subjectHidden = form.querySelector('[name="_subject"]');
     if (subjectField instanceof HTMLSelectElement && subjectHidden instanceof HTMLInputElement) {
       const label = subjectField.options[subjectField.selectedIndex]?.text || 'General inquiry';
-      subjectHidden.value = `Britecyte website — ${label}`;
+      subjectHidden.value = `Britecyte website—${label}`;
     }
 
     try {
