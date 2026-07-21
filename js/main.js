@@ -104,7 +104,7 @@ function scrollToInitialHash() {
   }
 }
 
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/brighterlives@britecyte.com';
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/642cc79bd5eb946f4aec9631167a6878';
 
 function initContactForm() {
   const form = document.querySelector('[data-contact-form]');
