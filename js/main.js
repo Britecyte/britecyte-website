@@ -118,8 +118,6 @@ function initContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const fields = form.querySelectorAll('input, textarea, select, button');
-    fields.forEach((el) => { el.disabled = true; });
     if (success) success.hidden = true;
     if (error) error.hidden = true;
     if (submitBtn) submitBtn.textContent = 'Sending…';
@@ -131,6 +129,11 @@ function initContactForm() {
       subjectHidden.value = `Britecyte website—${label}`;
     }
 
+    // Build payload before disabling — disabled fields are omitted from FormData.
+    const payload = Object.fromEntries(new FormData(form));
+    const fields = form.querySelectorAll('input, textarea, select, button');
+    fields.forEach((el) => { el.disabled = true; });
+
     try {
       const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
@@ -138,10 +141,13 @@ function initContactForm() {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error('Submit failed');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success === 'false' || result?.success === false) {
+        throw new Error(result?.message || 'Submit failed');
+      }
 
       form.reset();
       if (success) success.hidden = false;
