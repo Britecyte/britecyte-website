@@ -62,6 +62,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--site-header-h);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -349,6 +350,7 @@ textarea:disabled,
 
 /* Stacked cream sections: keep total gap ~ one section pad, not two */
 .section.section-cream + .section.section-cream,
+.hero + .section,
 .page-hero + .section {
   padding-top: calc(var(--section-padding) * 0.45);
 }
@@ -629,12 +631,15 @@ textarea:disabled,
   position: absolute;
   inset-inline: 0;
   bottom: 0;
-  height: 5rem;
-  background: linear-gradient(to bottom, transparent, rgba(255, 251, 247, 0.65));
+  height: 4rem;
+  background: linear-gradient(to bottom, transparent, var(--color-cream));
   pointer-events: none;
+  z-index: 2;
 }
 
 .hero-grid {
+  position: relative;
+  z-index: 3;
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
@@ -708,8 +713,10 @@ textarea:disabled,
 /* Mobile hero: compact the three proof cards and leave room for Safari chrome. */
 @media (max-width: 767px) {
   .hero {
-    min-height: calc(100svh - var(--site-header-h) - 1rem);
-    padding-block: 1.5rem calc(2rem + env(safe-area-inset-bottom));
+    /* Fill the first screen so About (and its photo) stay below the fold. */
+    min-height: calc(100svh - var(--site-header-h));
+    /* Bottom pad clears the 4rem hero→about fade so cards aren't covered. */
+    padding-block: 1.5rem calc(4rem + env(safe-area-inset-bottom));
   }
 
   .hero-grid {
@@ -888,6 +895,17 @@ textarea:disabled,
 }
 
 /* ── About ───────────────────────────────────────────────────────────────── */
+/* Softens the hard edge where the about photo begins (above .products-bg). */
+.about-gradient {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 4rem;
+  background: linear-gradient(to bottom, var(--color-cream), transparent);
+  pointer-events: none;
+  z-index: 1; /* above photo (0), under .container text */
+}
+
 .about-grid {
   display: grid;
   gap: 1.5rem;

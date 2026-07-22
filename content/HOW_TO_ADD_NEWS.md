@@ -46,7 +46,7 @@ Put **newest items first** in the file.
 
 ## 2. Rebuild the article pages
 
-In Terminal, from the `companysite` folder:
+In Terminal, from the `britecyte-website` folder:
 
 ```bash
 python3 scripts/build-news.py
