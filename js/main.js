@@ -4,6 +4,7 @@ import { initNewsGrid } from './news.js?v=20260710l';
 document.addEventListener('DOMContentLoaded', () => {
   initSectionMotifs();
   initNewsGrid();
+  initBritecyteAnalytics();
   initMobileNav();
   initSmoothScroll();
   initScrollReveal();
@@ -13,6 +14,51 @@ document.addEventListener('DOMContentLoaded', () => {
   initYear();
   scrollToInitialHash();
 });
+
+const BRITECYTE_ANALYTICS_ENDPOINT =
+  window.BRITECYTE_ANALYTICS_ENDPOINT ||
+  (["localhost", "127.0.0.1"].includes(window.location.hostname)
+    ? "http://127.0.0.1:3000/provider-directory/events"
+    : "https://lipoderma-launchpad.onrender.com/provider-directory/events");
+
+function analyticsSlug(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+}
+
+function trackBritecyteEvent(eventName, targetId, targetLabel) {
+  if (!BRITECYTE_ANALYTICS_ENDPOINT || !targetId) return;
+
+  const body = JSON.stringify({
+    events: [{
+      site_key: "britecyte",
+      event_name: eventName,
+      provider_id: `britecyte:${targetId}`,
+      provider_label: targetLabel,
+      page_path: window.location.pathname || "/",
+    }],
+  });
+
+  fetch(BRITECYTE_ANALYTICS_ENDPOINT, {
+    method: "POST",
+    mode: "cors",
+    credentials: "omit",
+    keepalive: true,
+    headers: { "Content-Type": "text/plain" },
+    body,
+  }).catch(() => {});
+}
+
+function initBritecyteAnalytics() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+
+    const label = link.textContent.trim().replace(/\s+/g, ' ') || link.getAttribute('aria-label') || link.href;
+    const href = link.getAttribute('href') || '';
+    const id = analyticsSlug(`${href}-${label}`);
+    trackBritecyteEvent("site_link_click", id, label);
+  });
+}
 
 function initMobileNav() {
   const toggle = document.querySelector('[data-menu-toggle]');
@@ -124,10 +170,12 @@ function initContactForm() {
 
     const subjectField = form.querySelector('[name="subject"]');
     const subjectHidden = form.querySelector('[name="_subject"]');
+    let subjectLabel = 'General inquiry';
     if (subjectField instanceof HTMLSelectElement && subjectHidden instanceof HTMLInputElement) {
-      const label = subjectField.options[subjectField.selectedIndex]?.text || 'General inquiry';
-      subjectHidden.value = `Britecyte website—${label}`;
+      subjectLabel = subjectField.options[subjectField.selectedIndex]?.text || subjectLabel;
+      subjectHidden.value = `Britecyte website—${subjectLabel}`;
     }
+    trackBritecyteEvent("contact_form_submit", `contact-${analyticsSlug(subjectLabel)}`, `Contact form: ${subjectLabel}`);
 
     // Build payload before disabling — disabled fields are omitted from FormData.
     const payload = Object.fromEntries(new FormData(form));
@@ -151,6 +199,7 @@ function initContactForm() {
 
       form.reset();
       if (success) success.hidden = false;
+      trackBritecyteEvent("contact_form_success", `contact-${analyticsSlug(subjectLabel)}`, `Contact form: ${subjectLabel}`);
     } catch {
       if (error) error.hidden = false;
     } finally {
