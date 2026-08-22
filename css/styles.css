@@ -4402,7 +4402,7 @@ body.is-panel-app {
     height: 100%;
     min-height: 100%;
     overflow: hidden;
-    padding-block: 1.15rem;
+    padding-block: 0.7rem;
   }
 
   .is-panel-app #panel-home .hero-grid {
@@ -4420,26 +4420,35 @@ body.is-panel-app {
   }
 
   .is-panel-app .hero-headline {
-    font-size: clamp(1.85rem, 8vw, 2.4rem);
+    font-size: clamp(1.55rem, 6.6vw, 2rem);
   }
 
   .is-panel-app .hero-belief {
     max-width: none;
-    font-size: clamp(1.02rem, 4.4vw, 1.2rem);
+    margin-top: 0.22rem;
+    font-size: clamp(0.92rem, 3.6vw, 1.08rem);
+    line-height: 1.28;
   }
 
   .is-panel-app .hero-lede {
     max-width: none;
-    font-size: 0.95rem;
-    line-height: 1.55;
+    margin-top: 0.7rem;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
   }
 
   .hero-cta-row {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    margin-top: 1.05rem;
+    gap: 0.5rem;
   }
 
   .hero-cta-row .btn {
-    flex: 1 1 12rem;
+    flex: 1 1 auto;
+    padding: 0.52rem 0.8rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
   }
 
   .is-panel-app .journey-stage,
@@ -4807,7 +4816,7 @@ a:is(.footer-meta a, .contact-address a, .pipe-detail-link a) {
     align-items: center;
     text-align: center;
     max-width: 36rem;
-    padding: 1.15rem 0.85rem 0.35rem;
+    padding: 0.7rem 0.8rem 0.2rem;
     background: none;
   }
 
