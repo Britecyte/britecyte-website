@@ -1,6 +1,6 @@
 # How to add or edit news (non-engineers)
 
-You only need to edit **one file**, then run **one command**.
+You only need to edit **one file**.
 
 ## 1. Edit the news list
 
@@ -12,16 +12,11 @@ Copy an existing block and change the fields:
 
 ```json
 {
-  "id": "short-url-name",
+  "id": "short-unique-name",
   "date": "2026-03",
   "dateLabel": "March 2026",
   "title": "Your headline here",
   "excerpt": "One or two sentences for the card preview.",
-  "tag": "Grant",
-  "body": [
-    "First paragraph on the article page.",
-    "Second paragraph."
-  ],
   "links": [
     {
       "label": "Read the press release",
@@ -35,36 +30,26 @@ Copy an existing block and change the fields:
 
 | Field | What to put |
 |-------|-------------|
-| `id` | Lowercase only, hyphens OK (`fda-clearance-2026`). Becomes the page URL. |
-| `date` | `YYYY-MM` for sorting |
+| `id` | Lowercase only, hyphens OK (`fda-clearance-2026`). Internal id only. |
+| `date` | `YYYY-MM` or `YYYY-MM-DD` for sorting |
 | `dateLabel` | What people see (`March 2026`) |
-| `tag` | Short label: `Grant`, `Clinical`, `Regulatory`, `Partnership`, `Product` |
-| `body` | Each string = one paragraph on the article page |
-| `links` | Buttons/links to the original PR or publisher page |
+| `excerpt` | Short preview on the card |
+| `links` | First link is what the card opens (PDF, publisher page, or press release) |
+
+For PDFs hosted on this site, use a path like:
+
+`assets/publications/your-file.pdf`
 
 Put **newest items first** in the file.
 
-## 2. Rebuild the article pages
-
-In Terminal, from the `britecyte-website` folder:
-
-```bash
-python3 scripts/build-news.py
-```
-
-That creates/updates:
-
-- `news/your-id/index.html` (each article page)
-- `news/index.html` (full news list)
-
-The homepage news cards load automatically from `data/news.json` — no extra step.
-
-## 3. Preview
+## 2. Preview
 
 With the local server running (`python3 serve.py`), open:
 
 - http://127.0.0.1:8002/#news
 - http://127.0.0.1:8002/news/
+
+Homepage and the all-news page both load from `data/news.json`. Clicking a card opens the source link directly.
 
 ## Don’t break the JSON
 

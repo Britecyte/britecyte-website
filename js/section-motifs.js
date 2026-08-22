@@ -3,7 +3,7 @@
  * Ambient corner SVGs intentionally disabled.
  */
 export const MOTIF_CONFIG = {
-  enabled: true,
+  enabled: false,
   sectionSelectors: [
     '[data-motif-key="hero"]',
     '[data-motif-key="about"]',

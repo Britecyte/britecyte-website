@@ -1,5 +1,59 @@
 [
   {
+    "id": "chernoff-j-surg-2026-adipose-allograft-meta-analysis",
+    "date": "2026-08-13",
+    "dateLabel": "August 13, 2026",
+    "title": "Journal of Surgery publishes systematic review and meta-analysis of banked human adipose allograft",
+    "excerpt": "A Journal of Surgery review and meta-analysis evaluates banked human adipose allograft for host-mediated dermal white adipose tissue replacement and volumization.",
+    "tag": "Publication",
+    "body": [
+      "Journal of Surgery published a systematic review and meta-analysis by Greg Chernoff, MD, examining banked human adipose allograft for host-mediated replacement of dermal white adipose tissue and soft-tissue volumization in plastic and reconstructive surgery.",
+      "The article reviews human clinical outcomes for adipose allograft injection or implantation and reports a favorable safety profile across included studies, while noting the need for larger comparative and randomized trials."
+    ],
+    "links": [
+      {
+        "label": "Read the publication (PDF)",
+        "url": "assets/publications/chernoff-j-surg-2026.pdf"
+      }
+    ]
+  },
+  {
+    "id": "danilkovitch-prs-go-2026-human-adipose-allograft-volume-restoration",
+    "date": "2026-08-04",
+    "dateLabel": "August 4, 2026",
+    "title": "PRS Global Open publishes Britecyte study on host-mediated volume restoration with human adipose allograft",
+    "excerpt": "A PRS Global Open article by Danilkovitch, Saunders, and Tom evaluates how human adipose allograft restores volume through host-mediated tissue replacement.",
+    "tag": "Publication",
+    "body": [
+      "Plastic and Reconstructive Surgery Global Open published a Britecyte study evaluating the mechanisms by which human adipose tissue allograft restores volume and the fate of donor-derived human DNA and proteins following implantation.",
+      "The study reports that the allograft provides immediate volume restoration through structurally intact adipocytes, with retention maintained by host-mediated tissue regeneration in an in vivo model."
+    ],
+    "links": [
+      {
+        "label": "Read the publication (PDF)",
+        "url": "assets/publications/danilkovitch-prs-go-2026.pdf"
+      }
+    ]
+  },
+  {
+    "id": "schoenhaus-prs-go-2025-metatarsalgia-fat-pad-restoration",
+    "date": "2025-12-03",
+    "dateLabel": "December 3, 2025",
+    "title": "PRS Global Open publishes pilot study on fat pad restoration in metatarsalgia patients",
+    "excerpt": "A pilot study reports structural and functional improvement after adipose allograft implantation for metatarsalgia secondary to plantar fat pad atrophy.",
+    "tag": "Publication",
+    "body": [
+      "Plastic and Reconstructive Surgery Global Open published a pilot study by Jodi Schoenhaus Gold, DPM, evaluating human adipose tissue allograft implantation in patients with metatarsalgia secondary to plantar fat pad atrophy.",
+      "The retrospective case series reports increased fat pad thickness in 9 of 10 treated feet at 12 weeks and improved Foot and Ankle Disability Index scores in 8 of 9 patients."
+    ],
+    "links": [
+      {
+        "label": "Read the publication (PDF)",
+        "url": "assets/publications/schoenhaus-prs-go-2025.pdf"
+      }
+    ]
+  },
+  {
     "id": "mscrf-1m-grant-osteoarthritis",
     "date": "2025-11",
     "dateLabel": "November 2025",
@@ -14,6 +68,24 @@
       {
         "label": "Read the press release (Business Wire)",
         "url": "https://www.businesswire.com/news/home/20251104760038/en/%241M-Grant-from-the-Maryland-Stem-Cell-Research-Fund-MSCRF-Powers-Novel-Adipose-Tissue-Allograft-Therapy-for-Osteoarthritis"
+      }
+    ]
+  },
+  {
+    "id": "mcginness-wounds-2025-fat-pad-augmentation-plantar-ulcers",
+    "date": "2025-09",
+    "dateLabel": "September 2025",
+    "title": "Wounds publishes case series on adipose allograft for recalcitrant plantar ulcers",
+    "excerpt": "A Wounds case series reports durable closure outcomes after fat pad augmentation using human adipose allograft alongside standard of care.",
+    "tag": "Publication",
+    "body": [
+      "Wounds published a case series by Kristen McGinness, DPM, and colleagues assessing human cryopreserved adipose tissue allograft as an adjunct to standard of care in patients with chronic recalcitrant plantar ulcers.",
+      "Seven of eight patients achieved complete closure within 2.8 months on average, with no hCAT-related adverse events observed at the time of analysis."
+    ],
+    "links": [
+      {
+        "label": "Read the publication (PDF)",
+        "url": "assets/publications/mcginness-wounds-2025.pdf"
       }
     ]
   },
@@ -52,6 +124,24 @@
       {
         "label": "Read the press release (BioSpace)",
         "url": "https://www.biospace.com/press-releases/britecytes-adipose-tissue-allograft-earns-safe-to-proceed-status-from-fda"
+      }
+    ]
+  },
+  {
+    "id": "regulski-prs-go-2024-fat-pad-defects-preulcerative-lesions",
+    "date": "2024-12-26",
+    "dateLabel": "December 26, 2024",
+    "title": "PRS Global Open publishes pilot study on human adipose allograft for fat pad defects",
+    "excerpt": "A pilot study describes human adipose tissue allograft for fat pad defects in patients with preulcerative lesions at risk of plantar ulceration.",
+    "tag": "Publication",
+    "body": [
+      "Plastic and Reconstructive Surgery Global Open published a pilot study by Matthew J. Regulski, DPM, Molly C. Saunders, Sharron E. McCulloch, and Alla Danilkovitch, PhD, evaluating human cryopreserved adipose tissue allograft for fat pad defects in patients with preulcerative lesions.",
+      "The article reports no product-related adverse events and no ulcerations during an average 6.4-month follow-up period in the retrospective clinical analysis."
+    ],
+    "links": [
+      {
+        "label": "Read the publication (PDF)",
+        "url": "assets/publications/regulski-prs-go-2024.pdf"
       }
     ]
   },

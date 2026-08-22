@@ -1,18 +1,27 @@
 import { initSectionMotifs } from './section-motifs.js?v=20260710l';
-import { initNewsGrid } from './news.js?v=20260710l';
+import { initNewsGrid } from './news.js?v=20260821c';
+import { initPipelineMap } from './pipeline-map.js?v=20260822t';
+import { initPanelNav } from './panel-nav.js?v=20260822b';
+import { initHeroField } from './hero-field.js?v=20260822aj';
+import { initTeamBios } from './team-bios.js?v=20260822z';
+import { initJourneySelect } from './journey-select.js?v=20260822r';
+import { initPathwayPager } from './pathway-pager.js?v=20260822w';
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPanelNav();
+  initHeroField();
+  initTeamBios();
+  initJourneySelect();
+  initPathwayPager();
   initSectionMotifs();
   initNewsGrid();
+  initPipelineMap();
   initBritecyteAnalytics();
   initMobileNav();
-  initSmoothScroll();
   initScrollReveal();
   initHeaderScroll();
   initContactForm();
-  initArticleNav();
   initYear();
-  scrollToInitialHash();
 });
 
 const BRITECYTE_ANALYTICS_ENDPOINT =
@@ -64,11 +73,12 @@ function initMobileNav() {
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-mobile-nav]');
   const iconPath = toggle?.querySelector('.menu-icon-path');
+  if (!toggle || !nav) return;
 
   const setExpanded = (expanded) => {
-    if (!toggle || !nav) return;
     toggle.setAttribute('aria-expanded', String(expanded));
     nav.classList.toggle('is-open', expanded);
+    document.documentElement.classList.toggle('is-menu-open', expanded);
     if (iconPath) {
       iconPath.setAttribute('d', expanded
         ? 'M6 18L18 6M6 6l12 12'
@@ -76,58 +86,36 @@ function initMobileNav() {
     }
   };
 
-  toggle?.addEventListener('click', () => {
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     setExpanded(toggle.getAttribute('aria-expanded') !== 'true');
   });
 
-  nav?.querySelectorAll('a').forEach((link) => {
+  nav.querySelectorAll('a, button').forEach((link) => {
     link.addEventListener('click', () => setExpanded(false));
   });
-}
 
-function initSmoothScroll() {
-  document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (!href || href === '#') return;
-
-      const hashIndex = href.indexOf('#');
-      if (hashIndex === -1) return;
-
-      const targetId = href.slice(hashIndex);
-      const pagePath = href.slice(0, hashIndex) || window.location.pathname.split('/').pop() || 'index.html';
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-      if (pagePath !== currentPage && pagePath !== '') return;
-
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setExpanded(false);
   });
 }
 
 function initScrollReveal() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
-    return;
-  }
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
   );
 
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => {
+    observer.observe(el);
+  });
 }
 
 function initHeaderScroll() {
@@ -140,14 +128,6 @@ function initHeaderScroll() {
 
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-}
-
-function scrollToInitialHash() {
-  if (!window.location.hash) return;
-  const target = document.querySelector(window.location.hash);
-  if (target) {
-    requestAnimationFrame(() => target.scrollIntoView());
-  }
 }
 
 const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/642cc79bd5eb946f4aec9631167a6878';
@@ -170,9 +150,10 @@ function initContactForm() {
 
     const subjectField = form.querySelector('[name="subject"]');
     const subjectHidden = form.querySelector('[name="_subject"]');
-    let subjectLabel = 'General inquiry';
-    if (subjectField instanceof HTMLSelectElement && subjectHidden instanceof HTMLInputElement) {
-      subjectLabel = subjectField.options[subjectField.selectedIndex]?.text || subjectLabel;
+    let subjectLabel = subjectField instanceof HTMLInputElement
+      ? subjectField.value.trim() || 'General inquiry'
+      : 'General inquiry';
+    if (subjectHidden instanceof HTMLInputElement) {
       subjectHidden.value = `Britecyte website—${subjectLabel}`;
     }
     trackBritecyteEvent("contact_form_submit", `contact-${analyticsSlug(subjectLabel)}`, `Contact form: ${subjectLabel}`);
@@ -212,27 +193,5 @@ function initContactForm() {
 function initYear() {
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());
-  });
-}
-
-function initArticleNav() {
-  const nav = document.querySelector('[data-article-nav]');
-  if (!nav) return;
-
-  const forward = nav.querySelector('[data-article-forward]');
-  const prev = nav.querySelector('[data-article-prev]');
-
-  document.addEventListener('keydown', (e) => {
-    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
-    const tag = (e.target instanceof Element ? e.target.closest('input, textarea, select, [contenteditable="true"]') : null);
-    if (tag) return;
-
-    if (e.key === 'ArrowLeft' && forward?.href) {
-      e.preventDefault();
-      window.location.assign(forward.href);
-    } else if (e.key === 'ArrowRight' && prev?.href) {
-      e.preventDefault();
-      window.location.assign(prev.href);
-    }
   });
 }
