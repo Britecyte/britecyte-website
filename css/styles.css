@@ -4402,7 +4402,7 @@ body.is-panel-app {
     height: 100%;
     min-height: 100%;
     overflow: hidden;
-    padding-block: 0.7rem;
+    padding-block: 0.81rem;
   }
 
   .is-panel-app #panel-home .hero-grid {
@@ -4420,34 +4420,34 @@ body.is-panel-app {
   }
 
   .is-panel-app .hero-headline {
-    font-size: clamp(1.55rem, 6.6vw, 2rem);
+    font-size: clamp(1.78rem, 7.6vw, 2.3rem);
   }
 
   .is-panel-app .hero-belief {
     max-width: none;
-    margin-top: 0.22rem;
-    font-size: clamp(0.92rem, 3.6vw, 1.08rem);
+    margin-top: 0.25rem;
+    font-size: clamp(1.06rem, 4.14vw, 1.24rem);
     line-height: 1.28;
   }
 
   .is-panel-app .hero-lede {
     max-width: none;
-    margin-top: 0.7rem;
-    gap: 0.5rem;
-    font-size: 0.84rem;
+    margin-top: 0.81rem;
+    gap: 0.58rem;
+    font-size: 0.97rem;
     line-height: 1.45;
   }
 
   .hero-cta-row {
     flex-wrap: nowrap;
-    margin-top: 1.05rem;
-    gap: 0.5rem;
+    margin-top: 1.21rem;
+    gap: 0.58rem;
   }
 
   .hero-cta-row .btn {
     flex: 1 1 auto;
-    padding: 0.52rem 0.8rem;
-    font-size: 0.66rem;
+    padding: 0.6rem 0.92rem;
+    font-size: 0.76rem;
     letter-spacing: 0.1em;
   }
 
@@ -4816,7 +4816,7 @@ a:is(.footer-meta a, .contact-address a, .pipe-detail-link a) {
     align-items: center;
     text-align: center;
     max-width: 36rem;
-    padding: 0.7rem 0.8rem 0.2rem;
+    padding: 0.81rem 0.92rem 0.23rem;
     background: none;
   }
 
