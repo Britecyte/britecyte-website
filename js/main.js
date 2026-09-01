@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTeamBios();
   initJourneySelect();
   initPathwayPager();
+  initBackgroundVideos();
   initSectionMotifs();
   initNewsGrid();
   initPipelineMap();
@@ -194,4 +195,31 @@ function initYear() {
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());
   });
+}
+
+function initBackgroundVideos() {
+  const videos = Array.from(document.querySelectorAll("[data-bg-video]"));
+  if (!videos.length) return;
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const sync = (panelId) => {
+    videos.forEach((video) => {
+      const onScience = panelId === "platform";
+      if (reduced || !onScience) {
+        video.pause();
+        return;
+      }
+      video.muted = true;
+      const play = video.play();
+      if (play && typeof play.catch === "function") play.catch(() => {});
+    });
+  };
+
+  document.addEventListener("britecyte:panelchange", (event) => {
+    sync(event.detail?.panel);
+  });
+
+  const active = document.querySelector("[data-panel].is-active")?.dataset.panel;
+  sync(active);
 }

@@ -1339,7 +1339,8 @@ textarea:disabled,
   display: contents;
 }
 
-.products-bg-photo {
+.products-bg-photo,
+.products-bg-video {
   display: block;
   width: 100%;
   height: 100%;
@@ -2747,9 +2748,9 @@ a.news-card:focus-visible {
 
 /* Compact, split-view pipeline: detail remains stable while programs change. */
 .products-section .products-bg {
-  inset: 0 auto auto 0;
+  inset: 0;
   width: 100%;
-  height: 52rem;
+  height: 100%;
 }
 
 .pipe-map {
@@ -2841,7 +2842,7 @@ a.news-card:focus-visible {
 @media (max-width: 860px) {
   .products-section .products-bg {
     inset: 0;
-    height: auto;
+    height: 100%;
   }
 
   .pipe-map {
@@ -3487,6 +3488,30 @@ body.is-panel-app {
   display: none;
 }
 
+.science-unbox-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0.85rem 0 0;
+  flex-shrink: 0;
+}
+
+.is-panel-app .science-unbox-row {
+  margin-top: auto;
+  padding-top: 0.65rem;
+}
+
+.science-unbox-btn {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(255, 251, 247, 0.55);
+  border-color: rgba(35, 48, 81, 0.18);
+}
+
 .is-panel-app .proof-stats {
   margin-top: 0;
   flex-shrink: 0;
@@ -3836,20 +3861,26 @@ body.is-panel-app {
   overflow: hidden;
 }
 
+.is-panel-app .pathway-step {
+  background-color: rgba(255, 251, 247, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .is-panel-app .pathway-step--1 {
-  background: linear-gradient(135deg, rgba(255, 251, 247, 0.95), rgba(255, 235, 210, 0.75));
+  background: linear-gradient(135deg, rgba(255, 251, 247, 0.42), rgba(255, 235, 210, 0.28));
 }
 
 .is-panel-app .pathway-step--2 {
-  background: linear-gradient(135deg, rgba(255, 240, 220, 0.92), rgba(253, 200, 154, 0.55));
+  background: linear-gradient(135deg, rgba(255, 240, 220, 0.38), rgba(253, 200, 154, 0.22));
 }
 
 .is-panel-app .pathway-step--3 {
-  background: linear-gradient(135deg, rgba(253, 200, 154, 0.65), rgba(253, 137, 60, 0.35));
+  background: linear-gradient(135deg, rgba(253, 200, 154, 0.28), rgba(253, 137, 60, 0.16));
 }
 
 .is-panel-app .pathway-step--4 {
-  background: linear-gradient(135deg, rgba(253, 137, 60, 0.35), rgba(192, 120, 46, 0.45));
+  background: linear-gradient(135deg, rgba(253, 137, 60, 0.18), rgba(192, 120, 46, 0.2));
 }
 
 .is-panel-app .pathway-step > div {
@@ -4026,6 +4057,16 @@ body.is-panel-app {
 .is-panel-app .panel-body.products-section {
   position: relative;
   isolation: isolate;
+}
+
+.is-panel-app #platform .products-bg {
+  inset: 0;
+  height: 100%;
+}
+
+.is-panel-app #platform .products-bg-video {
+  object-position: center center;
+  opacity: 0.46;
 }
 
 @media (max-width: 1023px) {
