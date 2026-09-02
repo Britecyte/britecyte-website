@@ -131,7 +131,7 @@ function initHeaderScroll() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/642cc79bd5eb946f4aec9631167a6878';
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/70dc252fb1bf6f4d658a25453abeed0e';
 
 function initContactForm() {
   const form = document.querySelector('[data-contact-form]');
