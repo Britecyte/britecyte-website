@@ -36,7 +36,13 @@ jobs:
             --exclude 'node_modules/' \
             --exclude 'serve.py' \
             --exclude 'README.md' \
+            --exclude 'CNAME' \
             ./ _site/
+          rm -f _site/CNAME
+          if [ -f CNAME ] && grep -qi 'britecyte.com' CNAME; then
+            echo "Refusing to publish a britecyte.com CNAME from this testing fork."
+            exit 1
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

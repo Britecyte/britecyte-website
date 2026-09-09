@@ -1,20 +1,12 @@
-# Britecyte
+# Corporate site testing
 
-Static site for britecyte.com.
+Preview fork of [Britecyte/britecyte-website](https://github.com/Britecyte/britecyte-website).
 
-## Local preview
+This is **not** the live site. It does not use the britecyte.com domain.
 
-```bash
-python3 serve.py
-```
+- Live site: https://britecyte.com/
+- This preview: https://britecyte.github.io/corporate-site-testing/
 
-Open http://127.0.0.1:8002/.
+## Safety
 
-## Structure
-
-- `assets/`, `data/`, `js/`, `css/` — live site files
-- `news/` — public news pages
-- `scripts/` and `content/` — news authoring tools
-- `_archive/` — versioned source and retired assets; excluded from GitHub Pages deployment
-
-Deploys through `.github/workflows/deploy-pages.yml` on pushes to `main`.
+The production `CNAME` for `britecyte.com` is removed here on purpose. GitHub Pages on this repo is github.io only. If you sync from upstream, delete `CNAME` again before deploying so the live domain cannot attach to this fork.
