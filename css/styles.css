@@ -3965,11 +3965,19 @@ body.is-panel-app {
   justify-content: center;
   margin-top: 0.85rem;
   flex-shrink: 0;
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  position: relative;
+  z-index: 2;
 }
 
 .is-panel-app .news-more .btn {
   min-width: 13.5rem;
   padding: 0.7rem 1.6rem;
+  color: var(--color-ink);
+  background: #fff;
+  border-color: rgba(35, 48, 81, 0.28);
 }
 
 .is-panel-app .panel-body > .container.contact-panel-layout {
