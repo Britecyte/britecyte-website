@@ -131,7 +131,7 @@ function initHeaderScroll() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/needthefat@britecyte.com';
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/brighterlives@britecyte.com';
 
 function initContactForm() {
   const form = document.querySelector('[data-contact-form]');
