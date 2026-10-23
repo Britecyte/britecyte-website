@@ -1,21 +1,10 @@
-import { initSectionMotifs } from './section-motifs.js?v=20260710l';
-import { initNewsGrid } from './news.js?v=20260821c';
-import { initPipelineMap } from './pipeline-map.js?v=20260822t';
-import { initPanelNav } from './panel-nav.js?v=20260822b';
-import { initHeroField } from './hero-field.js?v=20260822aj';
-import { initTeamBios } from './team-bios.js?v=20260822z';
-import { initJourneySelect } from './journey-select.js?v=20260822r';
-import { initPathwayPager } from './pathway-pager.js?v=20260822w';
+import { initPipelineMap } from "./pipeline-map.js";
+import "./news-split.js?v=20261023r";
+import "./journey-carousel.js";
+import "./team-spotlight.js";
+import "./scroll-spy.js?v=20261023m";
 
-document.addEventListener('DOMContentLoaded', () => {
-  initPanelNav();
-  initHeroField();
-  initTeamBios();
-  initJourneySelect();
-  initPathwayPager();
-  initBackgroundVideos();
-  initSectionMotifs();
-  initNewsGrid();
+document.addEventListener("DOMContentLoaded", () => {
   initPipelineMap();
   initBritecyteAnalytics();
   initMobileNav();
@@ -76,10 +65,23 @@ function initMobileNav() {
   const iconPath = toggle?.querySelector('.menu-icon-path');
   if (!toggle || !nav) return;
 
+  let backdrop = document.querySelector('[data-mobile-nav-backdrop]');
+  if (!backdrop) {
+    backdrop = document.createElement('button');
+    backdrop.type = 'button';
+    backdrop.className = 'mobile-nav-backdrop';
+    backdrop.setAttribute('data-mobile-nav-backdrop', '');
+    backdrop.setAttribute('aria-label', 'Close menu');
+    backdrop.hidden = true;
+    nav.before(backdrop);
+  }
+
   const setExpanded = (expanded) => {
     toggle.setAttribute('aria-expanded', String(expanded));
     nav.classList.toggle('is-open', expanded);
     document.documentElement.classList.toggle('is-menu-open', expanded);
+    backdrop.hidden = !expanded;
+    backdrop.classList.toggle('is-visible', expanded);
     if (iconPath) {
       iconPath.setAttribute('d', expanded
         ? 'M6 18L18 6M6 6l12 12'
@@ -92,6 +94,8 @@ function initMobileNav() {
     event.stopPropagation();
     setExpanded(toggle.getAttribute('aria-expanded') !== 'true');
   });
+
+  backdrop.addEventListener('click', () => setExpanded(false));
 
   nav.querySelectorAll('a, button').forEach((link) => {
     link.addEventListener('click', () => setExpanded(false));
@@ -192,34 +196,7 @@ function initContactForm() {
 }
 
 function initYear() {
-  document.querySelectorAll('[data-year]').forEach((el) => {
+  document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = String(new Date().getFullYear());
   });
-}
-
-function initBackgroundVideos() {
-  const videos = Array.from(document.querySelectorAll("[data-bg-video]"));
-  if (!videos.length) return;
-
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const sync = (panelId) => {
-    videos.forEach((video) => {
-      const onScience = panelId === "platform";
-      if (reduced || !onScience) {
-        video.pause();
-        return;
-      }
-      video.muted = true;
-      const play = video.play();
-      if (play && typeof play.catch === "function") play.catch(() => {});
-    });
-  };
-
-  document.addEventListener("britecyte:panelchange", (event) => {
-    sync(event.detail?.panel);
-  });
-
-  const active = document.querySelector("[data-panel].is-active")?.dataset.panel;
-  sync(active);
 }
