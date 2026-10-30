@@ -135,7 +135,7 @@ function initHeaderScroll() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/brighterlives@britecyte.com';
+const CONTACT_ENDPOINT = 'https://www.launchpad.lipoderma.com/website-contact';
 
 function initContactForm() {
   const form = document.querySelector('[data-contact-form]');
